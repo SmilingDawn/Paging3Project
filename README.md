@@ -25,7 +25,7 @@ interface RepositoryAPI {
 }
 ```
 
-새로운 검색어를 입력할때마다 RecyclerView가 새로 갱신되도록 하였
+새로운 검색어를 입력할때마다 RecyclerView가 새로 갱신되도록 함
 ```kotlin
 class MainViewModel(private val repository: GitRepository): ViewModel() {
     private val _searchKeyword: MutableLiveData<String> = MutableLiveData("")
