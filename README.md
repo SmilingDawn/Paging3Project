@@ -40,5 +40,37 @@ class MainViewModel(private val repository: GitRepository): ViewModel() {
     }
 }
 ```
+### DataSource
+```kotlin
+class GitRepoDataSource(private val repositoryAPI: RepositoryAPI, private val search: String?, private val queryParams: MutableMap<String, String?>): PagingSource<Int, RepositoryModel>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RepositoryModel> {
+        return try {
+            val page = params.key ?: 1
+            val limit = params.loadSize
+
+            queryParams.run {
+                this["page"] = page.toString()
+                this["sort"] = "forks" // or starts
+                this["q"] = search
+            }
+
+            val response = repositoryAPI.getRepositories(queryParams)
+            val data = response?.items?.toList() ?: listOf()
+            val total = response?.total_count
+            val nextPage = if(data.count() == 20) page + 1 else null
+
+            LoadResult.Page(
+                data = data,
+                prevKey = null,
+                nextKey = nextPage
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+            LoadResult.Error(e)
+        }
+    }
+
+}
+```
 
 [1]: https://developer.android.com/topic/libraries/architecture/paging/data?hl=ko
