@@ -11,8 +11,8 @@ class MainViewModel(private val repository: GitRepository): ViewModel() {
     private val _searchKeyword: MutableLiveData<String> = MutableLiveData("")
     private val searchKeyword: LiveData<String> get() = _searchKeyword
 
-    fun setSearchGitRepo(sort: String) {
-        _searchKeyword.value = sort
+    fun setSearchGitRepo(keyword: String) {
+        _searchKeyword.value = keyword
     }
 
     var searchGitRep = searchKeyword.switchMap {
