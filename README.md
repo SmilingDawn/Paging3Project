@@ -2,7 +2,9 @@ Paging3Project
 ========================
 
 ## Introduction
-Android [Paging3][1] 를 이용한 프로젝트
+Android [Paging3][1] 를 이용한 프로젝트.   
+기존 Infinity Scroll List 구현 방식은 addOnScrollListener 을 상속받아 스크롤이 제일 하단에 도착했을 때 다음 page를 로드하는 방식이었으나   
+Paging3을 사용할 경우 현재 Item Count, Total Count, isLoading 등등을 신경쓰지 않고도 Infinity Scroll List를 구현할 수 있다.
 
 ## Descrption
 github에서 제공해주는 search api를 이용하여 paging이 되는 리스트를 구현
